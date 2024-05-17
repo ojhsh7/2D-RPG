@@ -64,17 +64,18 @@ public class StartManager : MonoBehaviour
             SceneManager.LoadScene("SelectScene");
         }
 
-        void ErrorMessageExit()
-        {
-            ErrorUI.SetActive(false);
-        }
-
     }
+    void ErrorMessageExit()
+    {
+        ErrorUI.SetActive(false);
+    }
+
+
     public void FindBtn()
     {
         FindUI.SetActive(false);
         ErrorUI.SetActive(true);
-        if (PlayerPrefs.GetString("FIND") == ErrorMessage.text)
+        if (PlayerPrefs.GetString("FIND") == FindFind.text)
         {
             ErrorMessage.text = $"ID : {PlayerPrefs.GetString("ID")}\nPW :  {PlayerPrefs.GetString("PW")}";
         }
