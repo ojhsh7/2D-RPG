@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
 
 
     public AudioClip JumpClip;
+    public AudioClip AttackClip;
     public float Speed = 4f;
     public float JumpPower = 6f;
 
@@ -113,6 +114,15 @@ public class Character : MonoBehaviour
         if (justAttack)
         
         {
+            justAttack = false;
+            animator.SetTrigger("Attack");
+            audioSource.PlayOneShot(AttackClip);
+            if (gameObject.name == "Warrior")
+            {
+                AttackObj.SetActive(true);
+                Invoke("SetAttackObjInactive", 0.5f);
+            }
+            else
             justAttack = false;
             animator.SetTrigger("Attack");
 

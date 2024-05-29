@@ -41,6 +41,7 @@ public class Select : MonoBehaviour
     {
         GameStart.SetActive(true);
         isPlayButtonClicked =true;
+        GameManager.Instance.CharacterName = Characters[charIndex].name;
         CharacterName = Characters[charIndex].name;
     }
     public void SelectCharactBtn(string btnName)
