@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7823794574865262574}
   m_Layer: 0
   m_Name: Mage
-  m_TagString: Attact
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 1004411265712534201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: -1.35, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0.96, y: -1.3, z: 0}
+  m_LocalScale: {x: 2.610503, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackObj: {fileID: 1726494796396285629, guid: 19145f1ab83e5c1489447eabe2b5066e, type: 3}
-  AttackSpeed: 3
+  AttackSpeed: 10
   JumpClip: {fileID: 8300000, guid: c4ba2e501a7e4c547bca3763dadb6a87, type: 3}
   AttackClip: {fileID: 8300000, guid: 960789a46d492bf4db2175f47fa2e716, type: 3}
   Speed: 4.5

@@ -30,7 +30,7 @@ public class Monster : MonoBehaviour
     {
         if (isDie) return;
        
-        moveTime += Time.time;
+        moveTime += Time.deltaTime;
 
         if (moveTime <= turnTime)
         {

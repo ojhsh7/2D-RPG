@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2116352158668255525}
   m_Layer: 0
   m_Name: Warrior
-  m_TagString: Attact
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackObj: {fileID: 5608116370141454226}
-  AttackSpeed: 3
+  AttackSpeed: 10
   JumpClip: {fileID: 8300000, guid: c4ba2e501a7e4c547bca3763dadb6a87, type: 3}
   AttackClip: {fileID: 8300000, guid: 960789a46d492bf4db2175f47fa2e716, type: 3}
   Speed: 6.5
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 3265494946280901469}
   m_Layer: 0
   m_Name: AttackObj
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
