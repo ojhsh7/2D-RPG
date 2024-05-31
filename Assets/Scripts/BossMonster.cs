@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BossMonster : MonoBehaviour
 {
-    private Animator MonsterAnimator;
-
     public float BossMonsterHP = 5000f;
     public float BossMonsterDamage = 15f;
     public float BossMonsterExp = 40;
@@ -14,7 +12,7 @@ public class BossMonster : MonoBehaviour
     private float turnTime = 0;
     private bool isDie = false;
 
-    private Animator BossMonsterAnimator;
+    private Animator MonsterAnimator;
 
     public float moveSpeed = 3f;
     public float RunSpeed = 4f;
@@ -70,12 +68,12 @@ public class BossMonster : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            BossMonsterAnimator.SetTrigger("Attack");
+            MonsterAnimator.SetTrigger("Attack");
             GameManager.Instance.PlayerHP -= BossMonsterDamage;
         }
         if (collision.gameObject.tag == "Attack")
         {
-            BossMonsterAnimator.SetTrigger("Damage");
+            MonsterAnimator.SetTrigger("Damage");
             BossMonsterHP -= collision.gameObject.GetComponent<Attack>().AttackDamage;
 
             if (BossMonsterHP <= 0)
@@ -88,7 +86,7 @@ public class BossMonster : MonoBehaviour
     private void BossMonsterDie()
     {
         isDie = true;
-        BossMonsterAnimator.SetTrigger("Die");
+        MonsterAnimator.SetTrigger("Die");
         GameManager.Instance.PlayerExp += BossMonsterExp;
 
         GetComponent<Collider2D>().enabled = false;
