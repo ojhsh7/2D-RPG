@@ -12,6 +12,8 @@ public class BossMonster : MonoBehaviour
     private float turnTime = 0;
     private bool isDie = false;
 
+    public GameObject[] ItemObj;
+
     private Animator MonsterAnimator;
 
     public float moveSpeed = 3f;
@@ -35,10 +37,6 @@ public class BossMonster : MonoBehaviour
 
         // 보스 몬스터 이동
         BossMonsterMove();
-
-
-       
-
     }
 
 
@@ -69,6 +67,11 @@ public class BossMonster : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             MonsterAnimator.SetTrigger("Attack");
+            GameManager.Instance.PlayerHP -= BossMonsterDamage;
+        }
+        else if (collision.gameObject.tag == "Player")
+        {
+            MonsterAnimator.SetTrigger("Attack1");
             GameManager.Instance.PlayerHP -= BossMonsterDamage;
         }
         if (collision.gameObject.tag == "Attack")
@@ -108,6 +111,14 @@ public class BossMonster : MonoBehaviour
         else
         {
             MonsterAnimator.SetBool("Run", false);
+        }
+    }
+    private void OnDestroy()
+    {
+        int itemRandom = Random.Range(0, ItemObj.Length);
+        if (itemRandom < ItemObj.Length)
+        {
+            Instantiate(ItemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
         }
     }
 }

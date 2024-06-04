@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour
     private bool isDie = false;
 
     public float moveSpeed = 3f;
+    public GameObject[] ItemObj; 
 
     private Animator MonsterAnimator;
 
@@ -53,6 +54,11 @@ public class Monster : MonoBehaviour
             MonsterAnimator.SetTrigger("Attack");
             GameManager.Instance.PlayerHP -= MonsterDamage;
         }
+        else if (collision.gameObject.tag == "Player")
+        {
+            MonsterAnimator.SetTrigger("Attack1");
+            GameManager.Instance.PlayerHP -= MonsterDamage;
+        }
         if (collision.gameObject.tag == "Attack")
         {
             MonsterAnimator.SetTrigger("Damage");
@@ -72,5 +78,13 @@ public class Monster : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1.5f); //Die 애니매이션  재생 시간 보장
+    }
+    private void OnDestroy()
+    {
+        int itemRandom = Random.Range(0, ItemObj.Length);
+        if (itemRandom < ItemObj.Length)
+        {
+            Instantiate(ItemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
     }
 }
