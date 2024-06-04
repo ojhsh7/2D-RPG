@@ -31,16 +31,16 @@ public class BossMonster : MonoBehaviour
         // 보스 몬스터 이동
         BossMonsterMove();
 
-        // 플레이어와의 거리 계산 및 공격
-        CheckAndAttackPlayer();
+        // 보스가 아이들 상태가 아닐 때만 플레이어와의 거리 계산 및 공격을 체크
+        if (!MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            CheckAndAttackPlayer();
+        }
     }
 
     private void BossMonsterMove()
     {
-        if (isDie) return;
-
-        // 보스가 Idle 상태일 때는 이동하지 않도록 함
-        if (MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
+        if (isDie || MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
 
         moveTime += Time.deltaTime;
 
