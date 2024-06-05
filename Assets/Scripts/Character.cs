@@ -12,7 +12,6 @@ public class Character : MonoBehaviour
     public GameObject AttackObj;
     public float AttackSpeed = 3f;
 
-
     public AudioClip JumpClip;
     public AudioClip AttackClip;
     public float Speed = 4f;
@@ -23,6 +22,8 @@ public class Character : MonoBehaviour
     private bool isClimbing;
     private float inputVertical;
     private bool justJump, justAttack;
+
+    public int health = 100; // health 필드 추가
 
     void Start()
     {
@@ -46,9 +47,10 @@ public class Character : MonoBehaviour
         Attack();
         Climbing();
     }
+
     private void Move()
     {
-        //이동
+        // 이동
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.right * Speed * Time.deltaTime);
@@ -64,7 +66,7 @@ public class Character : MonoBehaviour
             animator.SetBool("Move", false);
         }
 
-        //좌우 반전에 따른 이동
+        // 좌우 반전에 따른 이동
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             spriteRenderer.flipX = false;
@@ -75,7 +77,6 @@ public class Character : MonoBehaviour
         }
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -83,6 +84,7 @@ public class Character : MonoBehaviour
             isFloor = true;
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -90,6 +92,7 @@ public class Character : MonoBehaviour
             isFloor = false;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ladder")
@@ -119,59 +122,58 @@ public class Character : MonoBehaviour
             }
         }
     }
+
     private void Jump()
     {
         if (justJump)
         {
-
-            {
-                justJump = false;
-
-                rigidbody2d.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
-                animator.SetTrigger("Jump");
-                audioSource.PlayOneShot(JumpClip);
-            }
+            justJump = false;
+            rigidbody2d.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
+            animator.SetTrigger("Jump");
+            audioSource.PlayOneShot(JumpClip);
         }
     }
+
     private void Attack()
     {
         if (justAttack)
-
         {
             justAttack = false;
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(AttackClip);
-            if (gameObject.name == "Warrior2(Clone)")
+            if (gameObject.name == "Warrior(Clone)")
             {
                 AttackObj.SetActive(true);
                 Invoke("SetAttackObjInactive", 0.5f);
             }
             else
+            {
                 justAttack = false;
-            animator.SetTrigger("Attack");
-
-            if (spriteRenderer.flipX)
-            {
-                GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0f, 180f, 0f));
-                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
-                Destroy(obj, 3f);
-            }
-            else
-            {
-                GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 0, 0));
-                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * AttackSpeed, ForceMode2D.Impulse);
-                Destroy(obj, 3f);
+                animator.SetTrigger("Attack");
+                if (spriteRenderer.flipX)
+                {
+                    GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0f, 180f, 0f));
+                    obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
+                    Destroy(obj, 3f);
+                }
+                else
+                {
+                    GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 0, 0));
+                    obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * AttackSpeed, ForceMode2D.Impulse);
+                    Destroy(obj, 3f);
+                }
             }
         }
     }
+
     private void AttackCheck()
     {
-
         if (Input.GetKeyDown(KeyCode.C))
         {
             justAttack = true;
         }
     }
+
     private void ClimbingCheck()
     {
         inputVertical = Input.GetAxis("Vertical");
@@ -181,6 +183,7 @@ public class Character : MonoBehaviour
             Debug.Log("isClimbing : " + isClimbing);
         }
     }
+
     private void Climbing()
     {
         if (isClimbing)
@@ -194,7 +197,3 @@ public class Character : MonoBehaviour
         }
     }
 }
-
-
-
-

@@ -23,7 +23,13 @@ public class BossMonster : MonoBehaviour
     void Start()
     {
         MonsterAnimator = GetComponent<Animator>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // 플레이어 찾기
+        GameObject player = GameObject.FindGameObjectWithTag("Player"); // 플레이어 찾기
+
+        if (player != null)
+        {
+            playerTransform = player.transform;
+            Debug.Log("Player found: " + player.name); // 플레이어가 발견되었음을 로그에 출력
+        }
     }
 
     void Update()
@@ -32,7 +38,7 @@ public class BossMonster : MonoBehaviour
         BossMonsterMove();
 
         // 보스가 아이들 상태가 아닐 때만 플레이어와의 거리 계산 및 공격을 체크
-        if (!MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (!MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && playerTransform != null)
         {
             CheckAndAttackPlayer();
         }
@@ -88,21 +94,11 @@ public class BossMonster : MonoBehaviour
             // 데미지 애니메이션 후 트리거 리셋
             StartCoroutine(ResetTrigger("Damage"));
 
-            // 보스가 공격받을 때 Run 애니메이션을 20초 동안 실행
-            StartCoroutine(RunForSeconds(20));
-
             if (BossMonsterHP <= 0)
             {
                 BossMonsterDie();
             }
         }
-    }
-
-    private IEnumerator RunForSeconds(float seconds)
-    {
-        MonsterAnimator.SetBool("Run", true);
-        yield return new WaitForSeconds(seconds);
-        MonsterAnimator.SetBool("Run", false);
     }
 
     private IEnumerator ResetTrigger(string triggerName)

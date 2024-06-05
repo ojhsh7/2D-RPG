@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60005a0c77d4e1246b556c887facac05, type: 3}
-  m_Name: WarriorInfo2
+  m_Name: Warrior2Info
   m_EditorClassIdentifier: 
   Name: "\uC804\uC0AC2"
-  Feature: "\uADFC\uC811 \uACF5\uACA9\uC5D0 \uD2B9\uD654"
+  Feature: "\uBBFC\uCCA9\uD55C \uADFC\uC811\uACF5\uACA9"

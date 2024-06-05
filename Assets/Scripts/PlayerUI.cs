@@ -11,9 +11,10 @@ public class PlayerUI : MonoBehaviour
 
     public Slider HpSlider;
     private GameObject player;
+
     public GameObject spawnPos;
 
-    void Start()
+    private void Start()
     {
         IdText.text = GameManager.Instance.UserID;
         player = GameManager.Instance.SpawnPlayer(spawnPos.transform);
@@ -29,3 +30,4 @@ public class PlayerUI : MonoBehaviour
         HpSlider.value = GameManager.Instance.PlayerHP;
     }
 }
+

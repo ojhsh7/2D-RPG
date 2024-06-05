@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterImg: {fileID: 619362672}
-  IdText: {fileID: 1180195576}
+  IdText: {fileID: 205851605}
   HpSlider: {fileID: 1930499346}
   spawnPos: {fileID: 3739509}
 --- !u!4 &3739511
@@ -165,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 3739509}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.97, y: -3.92, z: -0.21293394}
+  m_LocalPosition: {x: 6.2, y: -2.82, z: -0.21293394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6911,7 +6911,7 @@ GameObject:
   - component: {fileID: 205851606}
   - component: {fileID: 205851605}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: ID_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7847,10 +7847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8b6a3235718ec429c42f89fbdc66b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterImg: {fileID: 619362672}
-  IdText: {fileID: 205851605}
-  HpSlider: {fileID: 1930499346}
-  spawnPos: {fileID: 1042333039}
+  CharacterImg: {fileID: 0}
+  IdText: {fileID: 0}
+  HpSlider: {fileID: 0}
+  spawnPos: {fileID: 0}
 --- !u!1 &1164677264
 GameObject:
   m_ObjectHideFlags: 0
@@ -8779,7 +8779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3c2e9496c55a7499c9a08504e3c84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: 
+  CharacterName: Warrior2
   UserID: 
   PlayerHP: 100
   PlayerExp: 1

@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24944349, y: 0.07848149}
   m_AnchorMax: {x: 0.9326406, y: 0.37977046}
-  m_AnchoredPosition: {x: -40.09993, y: -8.316498}
+  m_AnchoredPosition: {x: -40.09993, y: -8.316467}
   m_SizeDelta: {x: -80.1998, y: 16.633}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &45302762
@@ -3153,7 +3153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39820838, y: 0}
   m_AnchorMax: {x: 0.5592293, y: 0.08800001}
-  m_AnchoredPosition: {x: -9.876999, y: -5.5}
+  m_AnchoredPosition: {x: -9.877014, y: -5.5}
   m_SizeDelta: {x: 4.25, y: 11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023125094
@@ -3412,10 +3412,10 @@ MonoBehaviour:
   - {fileID: 379799942}
   - {fileID: 1341776698}
   CharacterInfos:
-  - {fileID: 11400000, guid: d3a8381fff108254a90b86d6ef978132, type: 2}
-  - {fileID: 11400000, guid: 10074bf61c0a6c24584d5c660c89d71d, type: 2}
-  - {fileID: 11400000, guid: bcb28253cdb1a214dae08147bc7593b1, type: 2}
-  - {fileID: 11400000, guid: a8bf498b32ecca246885a18a0d4abc06, type: 2}
+  - {fileID: 11400000, guid: 5fa49dc1487289545a4079c281929710, type: 2}
+  - {fileID: 11400000, guid: c9ec7fbef3c6ca148b6f946029e39c38, type: 2}
+  - {fileID: 11400000, guid: 7c0edc76b2d42504a99c970059d3680c, type: 2}
+  - {fileID: 11400000, guid: 3010270fabf8b7948b9231f80467a287, type: 2}
   GameStart: {fileID: 2041514758}
   GameCountTxt: {fileID: 701610761}
 --- !u!1 &2096411012

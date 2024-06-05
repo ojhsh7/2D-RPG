@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8510646424333567204
 Transform:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09740924, y: -0.07217565}
+  m_Offset: {x: -0.0580613, y: -0.035638265}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -90,7 +90,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24163963, y: 0.33165348}
+  m_Size: {x: 0.3203355, y: 0.40472823}
   m_EdgeRadius: 0
 --- !u!50 &6426574103081171061
 Rigidbody2D:
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4657147387496963896}
   - component: {fileID: 2461387719932939348}
   - component: {fileID: -6021218130652047941}
+  - component: {fileID: 3533025110677343774}
   m_Layer: 0
   m_Name: Warrior2
   m_TagString: Player
@@ -240,12 +241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6207f1595e8e67e409405941e42d84af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackObj: {fileID: 0}
+  AttackObj: {fileID: 52303502260084127}
   AttackSpeed: 3
-  JumpClip: {fileID: 0}
-  AttackClip: {fileID: 0}
+  JumpClip: {fileID: 8300000, guid: c4ba2e501a7e4c547bca3763dadb6a87, type: 3}
+  AttackClip: {fileID: 8300000, guid: 960789a46d492bf4db2175f47fa2e716, type: 3}
   Speed: 4
   JumpPower: 6
+  health: 100
 --- !u!61 &-6021218130652047941
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -291,3 +293,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.39309692, y: 0.5423619}
   m_EdgeRadius: 0
+--- !u!50 &3533025110677343774
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858943532594003965}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
