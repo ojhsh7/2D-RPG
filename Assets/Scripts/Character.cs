@@ -141,7 +141,7 @@ public class Character : MonoBehaviour
             justAttack = false;
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(AttackClip);
-            if (gameObject.name == "Warrior(Clone)")
+            if (gameObject.name == "Warrior2(Clone)")
             {
                 AttackObj.SetActive(true);
                 Invoke("SetAttackObjInactive", 0.5f);
