@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossMonster : MonoBehaviour
@@ -12,12 +11,13 @@ public class BossMonster : MonoBehaviour
     private float moveTime = 0;
     private float turnTime = 0;
     private bool isDie = false;
+    private bool isRunning = false;
 
     public GameObject[] ItemObj;
 
     private Animator MonsterAnimator;
     public float moveSpeed = 3f;
-    public float RunSpeed = 4f;
+    public float RunSpeed = 6f; // 달리기 속도 증가
     private Transform playerTransform; // 플레이어의 Transform을 저장할 변수
 
     void Start()
@@ -52,7 +52,7 @@ public class BossMonster : MonoBehaviour
 
         if (moveTime <= turnTime)
         {
-            this.transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
+            this.transform.Translate((isRunning ? RunSpeed : moveSpeed) * Time.deltaTime, 0, 0);
         }
         else
         {
@@ -94,11 +94,23 @@ public class BossMonster : MonoBehaviour
             // 데미지 애니메이션 후 트리거 리셋
             StartCoroutine(ResetTrigger("Damage"));
 
+            // 공격을 맞았을 때 20초 동안 달리기 시작
+            StartCoroutine(StartRunning());
+
             if (BossMonsterHP <= 0)
             {
                 BossMonsterDie();
             }
         }
+    }
+
+    private IEnumerator StartRunning()
+    {
+        isRunning = true;
+        MonsterAnimator.SetBool("Run", true); // Run 애니메이션 시작
+        yield return new WaitForSeconds(20f); // 20초 동안 달리기
+        isRunning = false;
+        MonsterAnimator.SetBool("Run", false); // Run 애니메이션 종료
     }
 
     private IEnumerator ResetTrigger(string triggerName)
@@ -123,6 +135,22 @@ public class BossMonster : MonoBehaviour
         if (itemRandom < ItemObj.Length)
         {
             Instantiate(ItemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
+    }
+    public class BossDeath : MonoBehaviour
+    {
+        // 보스 몬스터가 죽을 때 호출되는 함수
+        public void Die()
+        {
+            // 일정 시간 후에 RemoveComponents 함수 호출 (예: 2초 후)
+            Invoke("RemoveComponents", 2.0f);
+        }
+
+        void RemoveComponents()
+        {
+            // Rigidbody와 Collider 제거
+            Destroy(GetComponent<Rigidbody2D>());
+            Destroy(GetComponent<BoxCollider2D>());
         }
     }
 }
