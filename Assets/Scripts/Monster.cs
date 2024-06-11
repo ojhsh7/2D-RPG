@@ -21,8 +21,14 @@ public class Monster : MonoBehaviour
     void Start()
     {
         MonsterAnimator = this.GetComponent<Animator>();
+       
+        {
+            // 몬스터가 생성될 때 MonsterManager에 추가합니다.
+            MonsterManager.Instance.AddMonster(gameObject);
+        }
+
     }
-  
+
     void Update()
     {
         MonsterMove();
@@ -77,14 +83,20 @@ public class Monster : MonoBehaviour
         GameManager.Instance.PlayerExp += MonsterExp;
 
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 1.5f); //Die 애니매이션  재생 시간 보장
+        Invoke("CreateItem", 1.5f); //Die 애니매이션  재생 시간 보장
     }
-    private void OnDestroy()
+    private void CreateItem()
     {
         int itemRandom = Random.Range(0, ItemObj.Length);
         if (itemRandom < ItemObj.Length)
         {
             Instantiate(ItemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
         }
+        Destroy(gameObject);
+    }
+    void OnDestroy()
+    {
+        // 몬스터가 파괴될 때 MonsterManager에서 제거합니다.
+        MonsterManager.Instance.RemoveMonster(gameObject);
     }
 }

@@ -1,11 +1,10 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class Character : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidbody2d;
     private AudioSource audioSource;
 
@@ -22,13 +21,13 @@ public class Character : MonoBehaviour
     private bool isClimbing;
     private float inputVertical;
     private bool justJump, justAttack;
+    private bool faceRight = true;
 
     public int health = 100; // health 필드 추가
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -55,26 +54,27 @@ public class Character : MonoBehaviour
         {
             transform.Translate(Vector3.right * Speed * Time.deltaTime);
             animator.SetBool("Move", true);
+            if (!faceRight) Filp();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * Speed * Time.deltaTime);
             animator.SetBool("Move", true);
+            if (faceRight) Filp();
         }
         else
         {
             animator.SetBool("Move", false);
         }
+    }
 
-        // 좌우 반전에 따른 이동
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            spriteRenderer.flipX = true;
-        }
+    private void Filp()
+    {
+        faceRight = !faceRight;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -143,14 +143,14 @@ public class Character : MonoBehaviour
             audioSource.PlayOneShot(AttackClip);
             if (gameObject.name == "Warrior(Clone)")
             {
-                AttackObj.SetActive(true);
+                AttackObj.GetComponent<Collider2D>().enabled = true;
                 Invoke("SetAttackObjInactive", 0.5f);
             }
             else
             {
                 justAttack = false;
                 animator.SetTrigger("Attack");
-                if (spriteRenderer.flipX)
+                if (!faceRight)
                 {
                     GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0f, 180f, 0f));
                     obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
@@ -164,6 +164,12 @@ public class Character : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SetAttackObjInactive()
+    {
+        AttackObj.GetComponent<Collider2D>().enabled = false;
+        Debug.Log("AttackObj.inactive position : " + AttackObj.transform.position);
     }
 
     private void AttackCheck()
@@ -195,5 +201,17 @@ public class Character : MonoBehaviour
         {
             rigidbody2d.gravityScale = 1f;
         }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player died!"); // 콘솔에 사망 메시지 출력
+
+        // 여기에 원하는 사망 처리를 추가합니다. 예를 들어:
+        // 1. 플레이어 게임 오브젝트를 비활성화합니다.
+        gameObject.SetActive(false);
+
+        // 2. 게임 오버 씬으로 이동하거나 다른 처리를 수행할 수 있습니다.
+        //SceneManager.LoadScene("GameOverScene");
     }
 }

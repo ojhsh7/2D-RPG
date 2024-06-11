@@ -1,24 +1,21 @@
-
 using UnityEngine;
 using UnityEngine.UI;
-
-
 
 public class PlayerUI : MonoBehaviour
 {
     public Image CharacterImg;
     public Text IdText;
-
     public Slider HpSlider;
     private GameObject player;
-
     public GameObject spawnPos;
 
     private void Start()
     {
         IdText.text = GameManager.Instance.UserID;
         player = GameManager.Instance.SpawnPlayer(spawnPos.transform);
+        HpSlider.maxValue = player.GetComponent<PlayerHealth>().maxHealth; // 최대 HP 설정
     }
+
     void Update()
     {
         display();
@@ -30,4 +27,3 @@ public class PlayerUI : MonoBehaviour
         HpSlider.value = GameManager.Instance.PlayerHP;
     }
 }
-

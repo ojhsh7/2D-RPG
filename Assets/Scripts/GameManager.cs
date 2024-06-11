@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public string CharacterName;
+    private float startTime;
+
+    public Define.Player SelectedPlayer;
     public string UserID;
 
     public float PlayerHP = 100f;//체력
@@ -32,14 +34,26 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UserID = PlayerPrefs.GetString("ID");
+        startTime = Time.time;
     }
 
     public GameObject SpawnPlayer(Transform spawnPos)
     {
-        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + GameManager.Instance.CharacterName);
+        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + SelectedPlayer.ToString());
         GameObject player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
 
         return player;
     }
- 
+
+    public void DisplayPlayTime()
+    {
+        // 플레이 시간을 계산합니다.
+        float playTime = Time.time - startTime;
+        int minutes = Mathf.FloorToInt(playTime / 60F);
+        int seconds = Mathf.FloorToInt(playTime % 60F);
+
+        // 플레이 시간을 로그로 출력합니다.
+        Debug.Log($"You have played the game for {minutes} minutes and {seconds} seconds.");
+    }
+
 }
