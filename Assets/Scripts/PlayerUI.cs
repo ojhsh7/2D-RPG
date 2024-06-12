@@ -13,7 +13,7 @@ public class PlayerUI : MonoBehaviour
     {
         IdText.text = GameManager.Instance.UserID;
         player = GameManager.Instance.SpawnPlayer(spawnPos.transform);
-        HpSlider.maxValue = player.GetComponent<PlayerHealth>().maxHealth; // 최대 HP 설정
+        HpSlider.maxValue = player.GetComponent<PlayerHealth>().maxHP; // 최대 HP 설정
     }
 
     void Update()

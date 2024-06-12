@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     public Define.Player SelectedPlayer;
     public string UserID;
 
-    public float PlayerHP = 100f;//체력
-    public float PlayerExp = 1f; //경험치 
+    public float PlayerHP = 100f; // 체력
+    public float PlayerExp = 1f; // 경험치
 
-    private GameObject player;
+    public GameObject player;
 
     public int Coin = 0;
 
@@ -22,13 +22,13 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
         {
-        Instance = this;
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject); // this.gameObject를 DontDestroyOnLoad로 호출
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(Instance);
     }
 
     private void Start()
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + SelectedPlayer.ToString());
         GameObject player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
-
+        this.player = player; // player 참조 저장
         return player;
     }
 
@@ -55,5 +55,4 @@ public class GameManager : MonoBehaviour
         // 플레이 시간을 로그로 출력합니다.
         Debug.Log($"You have played the game for {minutes} minutes and {seconds} seconds.");
     }
-
 }

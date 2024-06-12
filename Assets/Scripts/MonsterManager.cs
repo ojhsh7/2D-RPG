@@ -11,7 +11,7 @@ public class MonsterManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-      
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

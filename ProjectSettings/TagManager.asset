@@ -9,6 +9,8 @@ TagManager:
   - Attack
   - Coin
   - HP
+  - Speed
+  - Damage
   layers:
   - Default
   - TransparentFX

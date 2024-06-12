@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4476850410646970554}
   - component: {fileID: 527215354501858189}
   - component: {fileID: 7823794574865262574}
+  - component: {fileID: 8706283857681537119}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Player
@@ -200,6 +201,7 @@ MonoBehaviour:
   AttackClip: {fileID: 8300000, guid: 960789a46d492bf4db2175f47fa2e716, type: 3}
   Speed: 4.5
   JumpPower: 6
+  health: 100
 --- !u!82 &7823794574865262574
 AudioSource:
   m_ObjectHideFlags: 0
@@ -296,3 +298,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8706283857681537119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004411265712534201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14cfbe1af49f7b540ba98d19622e1883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpSlider: {fileID: 0}
+  maxHP: 100
+  cameraShake: {fileID: 0}

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 412244534845936311}
   - component: {fileID: 3050416398012948463}
   - component: {fileID: 2116352158668255525}
+  - component: {fileID: 8843890819975349586}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -298,6 +299,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8843890819975349586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068691677193394202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14cfbe1af49f7b540ba98d19622e1883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpSlider: {fileID: 0}
+  maxHP: 100
+  cameraShake: {fileID: 0}
 --- !u!1 &5608116370141454226
 GameObject:
   m_ObjectHideFlags: 0

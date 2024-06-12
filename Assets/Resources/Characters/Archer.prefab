@@ -213,7 +213,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -310,3 +310,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cfbe1af49f7b540ba98d19622e1883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 100
+  cameraShake: {fileID: 0}

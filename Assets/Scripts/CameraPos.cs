@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraPos : MonoBehaviour
 {
     private GameObject playerObj;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -19,7 +12,9 @@ public class CameraPos : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(playerObj.transform.position.x, playerObj.transform.position.y, transform.position.z);
+            // 플레이어의 위치를 받아서 해당 위치로 카메라를 이동시킵니다.
+            Vector3 playerPosition = playerObj.transform.position;
+            transform.position = new Vector3(playerPosition.x, playerPosition.y, transform.position.z);
         }
     }
 }

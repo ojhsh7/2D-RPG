@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 public class Character : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D rigidbody2d;
     private AudioSource audioSource;
+
 
     public GameObject AttackObj;
     public float AttackSpeed = 3f;
@@ -15,6 +16,7 @@ public class Character : MonoBehaviour
     public AudioClip AttackClip;
     public float Speed = 4f;
     public float JumpPower = 6f;
+    public int Damage = 10;
 
     private bool isFloor;
     private bool isLadder;
@@ -23,13 +25,14 @@ public class Character : MonoBehaviour
     private bool justJump, justAttack;
     private bool faceRight = true;
 
-    public int health = 100; // health 필드 추가
+    public int health = 100;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -49,7 +52,6 @@ public class Character : MonoBehaviour
 
     private void Move()
     {
-        // 이동
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.right * Speed * Time.deltaTime);
@@ -82,6 +84,10 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             isFloor = true;
+        }
+        else if (collision.gameObject.tag == "Monster")
+        {
+            TakeDamage(10); // 몬스터와 충돌 시 데미지를 입음
         }
     }
 
@@ -148,7 +154,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                justAttack = false;
+                // 첫 번째 justAttack = false; 문 제거
                 animator.SetTrigger("Attack");
                 if (!faceRight)
                 {
@@ -165,6 +171,7 @@ public class Character : MonoBehaviour
             }
         }
     }
+
 
     private void SetAttackObjInactive()
     {
@@ -203,15 +210,37 @@ public class Character : MonoBehaviour
         }
     }
 
-    void Die()
+    public void TakeDamage(int damage)
     {
-        Debug.Log("Player died!"); // 콘솔에 사망 메시지 출력
+        health -= damage;
+        health = Mathf.Clamp(health, 0, 100);
 
-        // 여기에 원하는 사망 처리를 추가합니다. 예를 들어:
-        // 1. 플레이어 게임 오브젝트를 비활성화합니다.
-        gameObject.SetActive(false);
+        if (health <= 0)
+        {
+            Die();
+        }
 
-        // 2. 게임 오버 씬으로 이동하거나 다른 처리를 수행할 수 있습니다.
-        //SceneManager.LoadScene("GameOverScene");
+
+
+        void Die()
+        {
+            Debug.Log("Player died!"); // 콘솔에 사망 메시지 출력
+
+            // 여기에 원하는 사망 처리를 추가합니다. 예를 들어:
+            // 1. 플레이어 게임 오브젝트를 비활성화합니다.
+            gameObject.SetActive(false);
+
+            // 2. 게임 오버 씬으로 이동하거나 다른 처리를 수행할 수 있습니다.
+            SceneManager.LoadScene("GameOverScene"); // 씬 이름을 실제 존재하는 씬 이름으로 변경
+        }
+    }
+    public void IncreaseSpeed(float amount)
+    {
+        Speed += amount;
+    }
+
+    public void IncreaseDamage(int amount)
+    {
+        Damage += amount;
     }
 }
