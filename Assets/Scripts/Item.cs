@@ -26,8 +26,8 @@ public class Item : MonoBehaviour
             }
             else if (gameObject.tag == "Damage")
             {
-                GameManager.Instance.player.GetComponent<Character>().AttackObj.GetComponent<Attack>();
-                Debug.Log("Player Damage : " + GameManager.Instance.player.GetComponent<Character>().Speed);
+                GameManager.Instance.player.GetComponent<Character>().AttackObj.GetComponent <Attack>().AttackDamage += 10;
+                Debug.Log("Player Damage : " + GameManager.Instance.player.GetComponent<Character>().Damage);
                 Destroy(gameObject);
             }
         }

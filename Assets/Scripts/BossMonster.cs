@@ -42,7 +42,7 @@ public class BossMonster : MonoBehaviour
         // 플레이어가 콜라이더 안에 있을 때만 공격 체크
         if (playerInRange && !isAttacking)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(AttackWithInterval());
         }
     }
 
@@ -64,7 +64,7 @@ public class BossMonster : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack()
+    private IEnumerator AttackWithInterval()
     {
         isAttacking = true;
 
@@ -92,7 +92,7 @@ public class BossMonster : MonoBehaviour
         // 공격 애니메이션이 끝난 후 플레이어가 여전히 콜라이더 안에 있으면 다시 공격을 시도
         if (!isDie && playerInRange)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(AttackWithInterval());
         }
         else if (!isDie) // 플레이어가 콜라이더 안에 없으면 다시 이동 시작
         {
