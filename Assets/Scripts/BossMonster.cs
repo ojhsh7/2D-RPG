@@ -12,6 +12,8 @@ public class BossMonster : MonoBehaviour
     private float turnTime = 0;
     private bool isDie = false;
     private bool isRunning = false;
+    private bool isAttacking = false; // 공격 중인지 여부
+    private bool playerInRange = false; // 플레이어가 콜라이더 안에 있는지 여부
 
     public GameObject[] ItemObj;
 
@@ -37,16 +39,16 @@ public class BossMonster : MonoBehaviour
         // 보스 몬스터 이동
         BossMonsterMove();
 
-        // 보스가 아이들 상태가 아닐 때만 플레이어와의 거리 계산 및 공격을 체크
-        if (!MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && playerTransform != null)
+        // 플레이어가 콜라이더 안에 있을 때만 공격 체크
+        if (playerInRange && !isAttacking)
         {
-            CheckAndAttackPlayer();
+            StartCoroutine(Attack());
         }
     }
 
     private void BossMonsterMove()
     {
-        if (isDie || MonsterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
+        if (isDie || isAttacking) return;
 
         moveTime += Time.deltaTime;
 
@@ -62,20 +64,40 @@ public class BossMonster : MonoBehaviour
         }
     }
 
-    private void CheckAndAttackPlayer()
+    private IEnumerator Attack()
     {
-        if (isDie) return;
+        isAttacking = true;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        // 이동 멈추기
+        isRunning = false;
+        MonsterAnimator.SetBool("Run", false); // Run 애니메이션 종료
 
-        Debug.Log("Distance to Player: " + distanceToPlayer); // 플레이어와의 거리 디버깅
-
-        if (distanceToPlayer <= attackRange)
+        // Attack과 Attack1을 랜덤으로 선택
+        if (Random.Range(0, 2) == 0)
         {
-            // 플레이어가 공격 범위 내에 있을 때 공격 애니메이션 실행
-            Debug.Log("Player within attack range");
             MonsterAnimator.SetTrigger("Attack");
-            GameManager.Instance.PlayerHP -= BossMonsterDamage;
+            Debug.Log("Attack executed");
+        }
+        else
+        {
+            MonsterAnimator.SetTrigger("Attack1");
+            Debug.Log("Attack1 executed");
+        }
+
+        GameManager.Instance.PlayerHP -= BossMonsterDamage;
+        yield return new WaitForSeconds(1f); // 공격 애니메이션 재생 시간
+
+        isAttacking = false;
+
+        // 공격 애니메이션이 끝난 후 플레이어가 여전히 콜라이더 안에 있으면 다시 공격을 시도
+        if (!isDie && playerInRange)
+        {
+            StartCoroutine(Attack());
+        }
+        else if (!isDie) // 플레이어가 콜라이더 안에 없으면 다시 이동 시작
+        {
+            isRunning = true;
+            MonsterAnimator.SetBool("Run", true); // Run 애니메이션 시작
         }
     }
 
@@ -83,7 +105,11 @@ public class BossMonster : MonoBehaviour
     {
         if (isDie) return;
 
-        Debug.Log("Collision detected with: " + collision.gameObject.tag); // 디버그 로그 추가
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRange = true;
+            Debug.Log("Player entered attack range");
+        }
 
         if (collision.gameObject.CompareTag("Attack"))
         {
@@ -104,6 +130,15 @@ public class BossMonster : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRange = false;
+            Debug.Log("Player exited attack range");
+        }
+    }
+
     private IEnumerator StartRunning()
     {
         isRunning = true;
@@ -111,6 +146,13 @@ public class BossMonster : MonoBehaviour
         yield return new WaitForSeconds(20f); // 20초 동안 달리기
         isRunning = false;
         MonsterAnimator.SetBool("Run", false); // Run 애니메이션 종료
+
+        // 달리기가 종료된 후 플레이어가 콜라이더 안에 없으면 다시 달리기 상태로 전환
+        if (!playerInRange)
+        {
+            isRunning = true;
+            MonsterAnimator.SetBool("Run", true);
+        }
     }
 
     private IEnumerator ResetTrigger(string triggerName)
@@ -131,12 +173,16 @@ public class BossMonster : MonoBehaviour
 
     private void OnDestroy()
     {
-        int itemRandom = Random.Range(0, ItemObj.Length);
-        if (itemRandom < ItemObj.Length)
+        int itemCount = Random.Range(2, 6);  // 2~5개의 아이템을 생성
+
+        for (int i = 0; i < itemCount; i++)
         {
-            Instantiate(ItemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            int itemRandom = Random.Range(0, ItemObj.Length);
+            Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0); // 아이템 위치를 랜덤하게 조금씩 이동
+            Instantiate(ItemObj[itemRandom], transform.position + offset, Quaternion.identity);
         }
     }
+
     public class BossDeath : MonoBehaviour
     {
         // 보스 몬스터가 죽을 때 호출되는 함수

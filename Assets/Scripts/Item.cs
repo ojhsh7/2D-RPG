@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -10,14 +8,14 @@ public class Item : MonoBehaviour
         {
             if (gameObject.tag == "Coin")
             {
-                GameManager.Instance.Coin += 10;
-                Debug.Log("Player Coin :  " + GameManager.Instance.Coin);
+                CoinManager.Instance.AddCoin(10);
+                Debug.Log("Player Coin :  " + CoinManager.Instance.Coin);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "HP")
             {
                 GameManager.Instance.PlayerHP += 10;
-                Debug.Log("Player Coin : " + GameManager.Instance.PlayerHP);
+                Debug.Log("Player HP : " + GameManager.Instance.PlayerHP);
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "Speed")
@@ -29,7 +27,7 @@ public class Item : MonoBehaviour
             else if (gameObject.tag == "Damage")
             {
                 GameManager.Instance.player.GetComponent<Character>().AttackObj.GetComponent<Attack>();
-                Debug.Log("Player Speed : " + GameManager.Instance.player.GetComponent<Character>().Speed);
+                Debug.Log("Player Damage : " + GameManager.Instance.player.GetComponent<Character>().Speed);
                 Destroy(gameObject);
             }
         }
