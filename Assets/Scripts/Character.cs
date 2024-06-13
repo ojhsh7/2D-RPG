@@ -115,14 +115,15 @@ public class Character : MonoBehaviour
 
     private void JumpCheck()
     {
-        if (isFloor && rigidbody2d.velocity.y == 0)
+        if (isFloor && Mathf.Approximately(rigidbody2d.velocity.y, 0f))
         {
-            animator.SetBool("Jumping", false); // 바닥에 있고 속도가 0인 경우 점프 애니메이션 비활성화
+            animator.SetBool("Jump", false); // 바닥에 있고 속도가 0인 경우 점프 애니메이션 비활성화
         }
 
         if (isFloor && Input.GetKeyDown(KeyCode.Space))
         {
             justJump = true;
+            animator.SetBool("Jump", true); // 점프 시작 시 애니메이션 트리거
         }
     }
 
