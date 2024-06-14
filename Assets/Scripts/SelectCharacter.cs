@@ -22,7 +22,7 @@ public class Select : MonoBehaviour
     private bool isPlayButtonClicked = false;
     private float gameCount = 5f;
 
-    public static string CharacterName;
+    //public static string CharacterName;
 
     private void Update()
     {
@@ -45,8 +45,8 @@ public class Select : MonoBehaviour
 
         Define.Player player = (Define.Player)Enum.Parse(typeof(Define.Player), Characters[charIndex].name);
 
-        GameManager.Instance.SelectedPlayer.ToString();
-        CharacterName = Characters[charIndex].name;
+        GameManager.Instance.SelectedPlayer = player;
+        //CharacterName = Characters[charIndex].name;
     }
     public void SelectCharactBtn(string btnName)
     {
