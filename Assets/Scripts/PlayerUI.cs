@@ -1,5 +1,7 @@
 
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -28,4 +30,5 @@ public class PlayerUI : MonoBehaviour
         CharacterImg.sprite = player.GetComponent<SpriteRenderer>().sprite;
         HpSlider.value = GameManager.Instance.PlayerHP;
     }
+
 }

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public float PlayerHP = 100f;//체력
     public float PlayerExp = 1f; //경험치 
 
-    private GameObject player;
+    public GameObject player;
 
     public int Coin = 0;
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public GameObject SpawnPlayer(Transform spawnPos)
     {
         GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + GameManager.Instance.CharacterName);
-        GameObject player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
+        player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
 
         return player;
     }
