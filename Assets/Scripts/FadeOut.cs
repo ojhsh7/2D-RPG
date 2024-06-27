@@ -23,7 +23,7 @@ public class FadeOut : MonoBehaviour
     {
         while (FadeAlpha >= 0)
         {
-            FadeAlpha -= 0.03f;
+            FadeAlpha -= 0.003f;
 
             FadeImage.color = new Color(FadeImage.color.r, FadeImage.color.g, FadeImage.color.b, FadeAlpha);
             FadeText.color = new Color(FadeText.color.r, FadeText.color.g, FadeText.color.b, FadeAlpha);

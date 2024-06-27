@@ -14,23 +14,27 @@ public class Monster : MonoBehaviour
     private bool isDie = false;
 
     public float moveSpeed = 3f;
-    public GameObject[] ItemObj; 
+    public GameObject[] ItemObj;
+    public AudioClip dieSound; // Add this line
 
     private Animator MonsterAnimator;
+    private AudioSource audioSource; // Add this line
 
     void Start()
     {
         MonsterAnimator = this.GetComponent<Animator>();
+        audioSource = this.GetComponent<AudioSource>(); // Add this line
     }
-  
+
     void Update()
     {
         MonsterMove();
     }
+
     private void MonsterMove()
     {
         if (isDie) return;
-       
+
         moveTime += Time.deltaTime;
 
         if (moveTime <= turnTime)
@@ -45,6 +49,7 @@ public class Monster : MonoBehaviour
             transform.Rotate(0, 180, 0);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDie) return;
@@ -64,21 +69,26 @@ public class Monster : MonoBehaviour
             MonsterAnimator.SetTrigger("Damage");
             MonsterHP -= collision.gameObject.GetComponent<Attack>().AttackDamage;
 
-            if(MonsterHP <= 0)
+            if (MonsterHP <= 0)
             {
                 MonsterDie();
             }
         }
     }
+
     private void MonsterDie()
     {
         isDie = true;
         MonsterAnimator.SetTrigger("Die");
         GameManager.Instance.PlayerExp += MonsterExp;
 
+        // Play die sound
+        audioSource.PlayOneShot(dieSound); // Add this line
+
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 1.5f); //Die 애니매이션  재생 시간 보장
+        Destroy(gameObject, 3f); //Die 애니매이션  재생 시간 보장
     }
+
     private void OnDestroy()
     {
         int itemRandom = Random.Range(0, ItemObj.Length);
