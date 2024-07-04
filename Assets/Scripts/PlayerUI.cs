@@ -18,7 +18,7 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         IdText.text = GameManager.Instance.UserID;
-        player = GameManager.Instance.SpawnPlayer(spawnPos.transform);
+        player = GameManager.Instance.SpawnPlayer(spawnPos.transform);  
     }
     void Update()
     {
