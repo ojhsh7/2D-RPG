@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
     public string UserID;
 
     public float PlayerHP = 100f; // 체력
+    public float PlayerMP = 100f;
     public float PlayerExp = 1f;  // 경험치 
+    public float PlayerDef = 1f;
+    public int Coin = 0;
 
     public GameObject player;
 
-    public int Coin = 0;
 
     public Text cooldownText; // 스킬 쿨타임 텍스트 UI 요소
 
@@ -53,5 +55,13 @@ public class GameManager : MonoBehaviour
         {
             cooldownText.text = "";
         }
+    }
+    public Character Character
+    {
+        get { return player.GetComponent<Character>(); }
+    }
+    public Attack CharacterAttack
+    {
+        get { return Character.AttackObj.GetComponent<Attack>(); }
     }
 }
