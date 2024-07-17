@@ -4,7 +4,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    //private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidbody2d;
     private AudioSource audioSource;
 
@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     private bool isFloor;
     private bool isLadder;
     private bool isClimbing;
+    private bool faceRight =true;
     private float inputVertical;
     private bool justJump, justAttack;
     private bool isHoldingAttack2;
@@ -35,7 +36,6 @@ public class Character : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -63,13 +63,13 @@ public class Character : MonoBehaviour
         {
             transform.Translate(Vector3.right * Speed * Time.deltaTime);
             animator.SetBool("Move", true);
-            if (!isFacingRight) Flip();
+            if (!faceRight) Flip();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * Speed * Time.deltaTime);
             animator.SetBool("Move", true);
-            if (isFacingRight) Flip();
+            if (faceRight) Flip();
         }
         else
         {
@@ -79,9 +79,10 @@ public class Character : MonoBehaviour
 
     private void Flip()
     {
-        // 캐릭터 방향 전환
-        isFacingRight = !isFacingRight;
-        spriteRenderer.flipX = !spriteRenderer.flipX;
+        faceRight = !faceRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -149,7 +150,7 @@ public class Character : MonoBehaviour
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(AttackClip);
 
-            if (spriteRenderer.flipX)
+            if (!faceRight)
             {
                 GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0f, 180f, 0f));
                 obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
@@ -171,7 +172,7 @@ public class Character : MonoBehaviour
             audioSource.PlayOneShot(Attack2Clip);
             attack2Triggered = true;
 
-            if (spriteRenderer.flipX)
+            if (!faceRight)
             {
                 GameObject obj = Instantiate(CrossAttackObj, transform.position, Quaternion.Euler(0f, 180f, 0f));
                 obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * finalAttackSpeed, ForceMode2D.Impulse);
