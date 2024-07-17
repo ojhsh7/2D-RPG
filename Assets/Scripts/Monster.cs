@@ -57,12 +57,12 @@ public class Monster : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             MonsterAnimator.SetTrigger("Attack");
-            GameManager.Instance.PlayerHP -= MonsterDamage;
+            GameManager.Instance.PlayerStat.HP -= MonsterDamage;
         }
         else if (collision.gameObject.tag == "Player")
         {
             MonsterAnimator.SetTrigger("Attack1");
-            GameManager.Instance.PlayerHP -= MonsterDamage;
+            GameManager.Instance.PlayerStat.HP -= MonsterDamage;
         }
         if (collision.gameObject.tag == "Attack")
         {
@@ -80,7 +80,7 @@ public class Monster : MonoBehaviour
     {
         isDie = true;
         MonsterAnimator.SetTrigger("Die");
-        GameManager.Instance.PlayerExp += MonsterExp;
+        GameManager.Instance.PlayerStat.Exp += MonsterExp;
 
         // Play die sound
         audioSource.PlayOneShot(dieSound); // Add this line

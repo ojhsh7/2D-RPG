@@ -67,12 +67,12 @@ public class BossMonster : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             MonsterAnimator.SetTrigger("Attack");
-            GameManager.Instance.PlayerHP -= BossMonsterDamage;
+            GameManager.Instance.PlayerStat.HP -= BossMonsterDamage;
         }
         else if (collision.gameObject.tag == "Player")
         {
             MonsterAnimator.SetTrigger("Attack1");
-            GameManager.Instance.PlayerHP -= BossMonsterDamage;
+            GameManager.Instance.PlayerStat.HP -= BossMonsterDamage;
         }
         if (collision.gameObject.tag == "Attack")
         {
@@ -90,7 +90,7 @@ public class BossMonster : MonoBehaviour
     {
         isDie = true;
         MonsterAnimator.SetTrigger("Die");
-        GameManager.Instance.PlayerExp += BossMonsterExp;
+        GameManager.Instance.PlayerStat.Exp += BossMonsterExp;
 
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1.5f); //Die 애니매이션  재생 시간 보장

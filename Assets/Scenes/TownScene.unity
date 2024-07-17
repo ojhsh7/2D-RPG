@@ -6558,13 +6558,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3c2e9496c55a7499c9a08504e3c84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Mage
+  SelectedPlayer: 2
   UserID: 
-  PlayerHP: 100
-  PlayerMP: 73.9
-  PlayerExp: 0.5
-  PlayerDef: 1
-  Coin: 1000000
+  PlayerStat:
+    HP: 100
+    MP: 100
+    Exp: 1
+    Def: 1
+    Level: 1
+    Coin: 0
   player: {fileID: 0}
   cooldownText: {fileID: 146455910}
 --- !u!4 &1107905242
