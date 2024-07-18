@@ -11,6 +11,8 @@ TagManager:
   - HP
   - Attack2
   - initPos
+  - TAZOFX
+  - Skill
   layers:
   - Default
   - TransparentFX

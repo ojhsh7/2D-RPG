@@ -266,4 +266,8 @@ public class Character : MonoBehaviour
         animator.SetBool("Move", false);
         attack2Triggered = false;
     }
+    public void AttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+    }
 }
